@@ -1,5 +1,14 @@
 # rpicam-tui
 
+## TL;DR
+
+TUI for controlling an Raspberry Pi Camera module. Uses `rpicam-still` and `rpicam-vid` under the hood.
+Run on your Raspberry Pi with:
+
+```bash
+uvx run rpicam-tui
+```
+
 An interactive terminal UI for building and running `rpicam-still` / `rpicam-vid`
 commands on the Raspberry Pi Camera Module 3, without hand-typing long CLI
 invocations every time.
@@ -26,10 +35,13 @@ binaries — argv in, argv out, no `picamera2` abstraction layer in between.
 Dependencies are managed with [uv](https://docs.astral.sh/uv/):
 
 ```bash
+# Install uv (recommended)
 curl -LsSf https://astral.sh/uv/install.sh | sh   # if uv isn't installed yet
+# Then:
 uv sync
 uv run python -m rpicam_tui
-# or: uv run rpicam-tui
+# Or, if you just want to use it:
+uvx rpicam-tui
 ```
 
 `uv sync` creates a `.venv` and installs exactly what's pinned in `uv.lock`.
@@ -53,16 +65,16 @@ The app runs fine on a laptop with no camera attached:
 
 ## Keybindings
 
-| Key      | Action                              |
-|----------|--------------------------------------|
-| `Ctrl+R` | Run capture                          |
-| `Ctrl+X` | Cancel running capture (SIGINT)      |
-| `Ctrl+T` | Toggle still/video mode              |
-| `Ctrl+S` | Save current settings as a preset    |
-| `Ctrl+L` | Load a preset                        |
-| `Ctrl+Y` | Copy the current command to clipboard|
-| `Ctrl+D` | Toggle dry-run mode                  |
-| `Ctrl+Q` | Quit (cancels any running capture)   |
+| Key      | Action                                |
+| -------- | ------------------------------------- |
+| `Ctrl+R` | Run capture                           |
+| `Ctrl+X` | Cancel running capture (SIGINT)       |
+| `Ctrl+T` | Toggle still/video mode               |
+| `Ctrl+S` | Save current settings as a preset     |
+| `Ctrl+L` | Load a preset                         |
+| `Ctrl+Y` | Copy the current command to clipboard |
+| `Ctrl+D` | Toggle dry-run mode                   |
+| `Ctrl+Q` | Quit (cancels any running capture)    |
 
 ## Presets
 
