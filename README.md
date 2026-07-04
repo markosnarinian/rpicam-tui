@@ -9,6 +9,8 @@ Run on your Raspberry Pi with:
 uvx run rpicam-tui
 ```
 
+## Overview
+
 An interactive terminal UI for building and running `rpicam-still` / `rpicam-vid`
 commands on the Raspberry Pi Camera Module 3, without hand-typing long CLI
 invocations every time.
