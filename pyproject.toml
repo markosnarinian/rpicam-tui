@@ -1,6 +1,6 @@
 [project]
 name = "rpicam-tui"
-version = "0.1.0"
+version = "0.1.1"
 description = "Interactive Textual TUI for building and running rpicam-still/rpicam-vid commands"
 readme = "README.md"
 requires-python = ">=3.9"
