@@ -23,14 +23,16 @@ binaries — argv in, argv out, no `picamera2` abstraction layer in between.
 
 ## Running on the Pi
 
+Dependencies are managed with [uv](https://docs.astral.sh/uv/):
+
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python3 -m rpicam_tui
-# or: python3 run.py
+curl -LsSf https://astral.sh/uv/install.sh | sh   # if uv isn't installed yet
+uv sync
+uv run python -m rpicam_tui
+# or: uv run rpicam-tui
 ```
 
+`uv sync` creates a `.venv` and installs exactly what's pinned in `uv.lock`.
 `rpicam-still`/`rpicam-vid` must be on `PATH` (they ship with `rpicam-apps` on
 Raspberry Pi OS with a Camera Module 3 attached).
 
@@ -43,7 +45,7 @@ The app runs fine on a laptop with no camera attached:
   you'll see a warning notification on startup and a note in the command
   preview.
 - You can also force this at any time with **Ctrl+D** (toggle dry-run), or by
-  launching with `python3 -m rpicam_tui --dry-run`.
+  launching with `uv run rpicam-tui --dry-run`.
 - In dry-run, "running" a capture just prints `[dry-run] would run: ...` to
   the output log and records a (fake, zero-duration) entry in run history, so
   the whole picking-settings → preview → run → history loop is exercisable
@@ -95,14 +97,16 @@ rpicam_tui/
   presets/                # seed preset JSON files
 tests/
   test_command_builder.py
-run.py                    # `python3 run.py` convenience entry point
+run.py                    # `python3 run.py` / `uv run python run.py` convenience entry point
+pyproject.toml             # uv/PEP 621 project + dependency metadata
+uv.lock                     # pinned dependency versions
 ```
 
 ## Tests
 
 ```bash
-pip install pytest
-pytest
+uv sync                # installs the `dev` dependency group (pytest) too
+uv run pytest
 ```
 
 `command_builder.py` has no Textual or subprocess dependency, so its tests
